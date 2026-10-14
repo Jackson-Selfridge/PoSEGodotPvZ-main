@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ci561nmn76m4m"]
+
+[ext_resource type="Script" uid="uid://2updmye6vfs6" path="res://plants/pea.gd" id="1_03xce"]
+[ext_resource type="Texture2D" uid="uid://diyejjaeroasi" path="res://Art and Stuff/peaprojectile.png" id="2_17r4o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wsnoc"]
+size = Vector2(33, 31)
+
+[node name="Pea" type="Area2D" unique_id=1692852217]
+position = Vector2(-16, -14)
+script = ExtResource("1_03xce")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=219721705]
+position = Vector2(17, 15)
+shape = SubResource("RectangleShape2D_wsnoc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2085350630]
+position = Vector2(17.749998, 18.625)
+scale = Vector2(0.2354167, 0.21145834)
+texture = ExtResource("2_17r4o")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1804963076]
+position = Vector2(7, 7)
+rect = Rect2(-7, -7, 33, 31)

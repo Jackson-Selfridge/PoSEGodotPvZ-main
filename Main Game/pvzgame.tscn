@@ -3,6 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://c01670571vg1n" path="res://Art and Stuff/Lgrass.webp" id="1_n1f5j"]
 [ext_resource type="Texture2D" uid="uid://dhreq80hgh250" path="res://Art and Stuff/Dgrass.jpeg" id="2_n1f5j"]
 [ext_resource type="Script" uid="uid://d2vjvwq063hop" path="res://Main Game/checkerboard.gd" id="3_v3n8n"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="Script" uid="uid://bda1untpe0br0" path="res://Main Game/house_trigger.gd" id="5_v3n8n"]
+[ext_resource type="Script" uid="uid://dkoosxfhn3ek1" path="res://Main Game/wave_manager.gd" id="6_kmnlm"]
+[ext_resource type="PackedScene" uid="uid://c5cwrbhh2jfap" path="res://plants/peashooter.tscn" id="6_kpq5x"]
+>>>>>>> Stashed changes
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
@@ -36,3 +42,28 @@ script = ExtResource("3_v3n8n")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=174855986]
 position = Vector2(566, 209)
 zoom = Vector2(0.75, 0.75)
+<<<<<<< Updated upstream
+=======
+
+[node name="HouseTrigger" type="Area2D" parent="." unique_id=1436881547]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("5_v3n8n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseTrigger" unique_id=873072363]
+position = Vector2(-32, 320)
+shape = SubResource("RectangleShape2D_uj04i")
+
+[node name="WaveManager" type="Node" parent="." unique_id=272574409]
+script = ExtResource("6_kmnlm")
+
+[node name="SpawnTimer" type="Timer" parent="WaveManager" unique_id=1858743052]
+wait_time = 3.0
+autostart = true
+
+[node name="Peashooter" parent="." unique_id=476203373 instance=ExtResource("6_kpq5x")]
+position = Vector2(8, 270)
+
+[connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
+[connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]
+>>>>>>> Stashed changes
