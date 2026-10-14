@@ -16,6 +16,7 @@ var wave_number: int = 0
 var zombies_to_spawn: int = 0
 var alive_zombies: int = 0
 var spawning: bool = false
+var game_over: bool = false
 
 
 func _ready():
@@ -26,6 +27,8 @@ func _ready():
 
 
 func start_next_wave():
+	if game_over:
+		return
 	wave_number += 1
 	zombies_to_spawn = initial_zombies + (wave_number - 1) * 2
 	spawning = true
@@ -38,12 +41,16 @@ func start_next_wave():
 
 
 func _on_spawn_timer_timeout():
+	if game_over:
+		return
 	if spawning and zombies_to_spawn > 0:
 		spawn_zombie()
 
 
 func spawn_zombie():
 	if zombies_to_spawn <= 0:
+		return
+	if zombies_to_spawn <=0:
 		return
 
 	var zombie = zombie_scene.instantiate()
@@ -73,6 +80,8 @@ func _on_zombie_died():
 
 
 func complete_wave():
+	if game_over:
+		return
 	print("Wave ", wave_number, " completed!")
 	wave_completed.emit(wave_number)
 
@@ -86,3 +95,12 @@ func complete_wave():
 	await get_tree().create_timer(3.0).timeout
 
 	start_next_wave()
+	
+func stop_game():
+	if game_over:
+		return
+
+	game_over = true
+	spawning = false
+	$SpawnTimer.stop()
+	print("Game Over! Zombie spawning stopped.")

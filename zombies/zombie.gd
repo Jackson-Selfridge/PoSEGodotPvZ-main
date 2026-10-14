@@ -9,6 +9,7 @@ signal died
 var current_health: float
 var is_dead: bool = false
 var current_target: Node=null
+var game_over: bool = false
 
 
 func _ready():
@@ -18,7 +19,8 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if is_dead:
+	if is_dead or game_over:
+		velocity= Vector2.ZERO
 		return
 	if is_instance_valid(current_target):
 		velocity =Vector2.ZERO
