@@ -11,20 +11,13 @@ config_version=5
 [application]
 
 config/name="pvzGame"
-run/main_scene="uid://dd7ko1grujxn0"
 config/features=PackedStringArray("4.7", "Forward Plus")
+config/icon="res://Art and Stuff/icon.svg"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-
-[layer_names]
-
-2d_physics/layer_1="Plants"
-2d_physics/layer_2="Zombies"
-2d_physics/layer_3="Projectiles"
-2d_physics/layer_4="House"
 
 [physics]
 
