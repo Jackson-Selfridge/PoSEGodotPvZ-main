@@ -20,6 +20,4 @@ func _on_body_entered(body: Node2D):
 		for zombie in get_tree().get_nodes_in_group("zombies"):
 			zombie.game_over = true
 			
-		await get_tree().create_timer(2.0).timeout
-
-		get_tree().change_scene_to_file("res://Main Menu/mainmenu.tscn")
+		get_tree().change_scene_to_file("res://Main Menu/gameover.tscn")
