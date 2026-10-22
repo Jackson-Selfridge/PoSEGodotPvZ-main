@@ -20,6 +20,13 @@ corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jc63w"]
 bg_color = Color(0.33333334, 0.6509804, 0.29803923, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7h7mn"]
 bg_color = Color(0.14117648, 0.3372549, 0.16078432, 1)
@@ -52,7 +59,6 @@ corner_radius_bottom_left = 12
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0udnx"]
 bg_color = Color(0.2901961, 0.54901963, 0.7607843, 1)
 border_width_left = 2
-border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.14117648, 0.2901961, 0.41960785, 1)
@@ -122,6 +128,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uetqx")
 
+[node name="Background" type="ColorRect" parent="." unique_id=301606613]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.16862746, 0.14117648, 1)
+
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=2049727819]
 layout_mode = 1
 anchors_preset = 15
@@ -136,7 +151,10 @@ theme_override_constants/separation = 12
 
 [node name="GameOverLabel" type="Label" parent="CenterContainer/MainContainer" unique_id=1527515084]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.8509804, 0.2901961, 0.22745098, 1)
+theme_override_font_sizes/font_size = 36
 text = "Game Over"
+horizontal_alignment = 1
 
 [node name="RestartButton" type="Button" parent="CenterContainer/MainContainer" unique_id=77289088]
 custom_minimum_size = Vector2(240, 48)
