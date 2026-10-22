@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2kem1r2qdfv3"
-valid=false
+uid="uid://cx548k0ult4by"
+path="res://.godot/imported/conezombie.png-9045d82022b040d2d0968b4fe5a67d9f.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Art and Stuff/conezombie.png"
+dest_files=["res://.godot/imported/conezombie.png-9045d82022b040d2d0968b4fe5a67d9f.ctex"]
 
 [params]
 

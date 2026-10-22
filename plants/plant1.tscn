@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5cwrbhh2jfap"]
 
-[ext_resource type="Texture2D" uid="uid://bhqqhlc74kbe7" path="res://Art and Stuff/peashooter.png" id="1_ioakc"]
+[ext_resource type="Texture2D" uid="uid://dl6edhgyrxpil" path="res://Art and Stuff/peashooter.png" id="1_ioakc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g36yv"]
 size = Vector2(140.09949, 162.89362)

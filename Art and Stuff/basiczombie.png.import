@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diveqrgycmgd4"
-valid=false
+uid="uid://c680nwbadjvo8"
+path="res://.godot/imported/basiczombie.png-b55942adc8fc6d7e270acc60df782e92.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Art and Stuff/basiczombie.png"
+dest_files=["res://.godot/imported/basiczombie.png-b55942adc8fc6d7e270acc60df782e92.ctex"]
 
 [params]
 

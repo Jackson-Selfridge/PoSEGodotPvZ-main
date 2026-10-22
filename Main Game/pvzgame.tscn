@@ -3,12 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://c01670571vg1n" path="res://Art and Stuff/Lgrass.webp" id="1_n1f5j"]
 [ext_resource type="Texture2D" uid="uid://dhreq80hgh250" path="res://Art and Stuff/Dgrass.jpeg" id="2_n1f5j"]
 [ext_resource type="Script" uid="uid://d2vjvwq063hop" path="res://Main Game/checkerboard.gd" id="3_v3n8n"]
-<<<<<<< Updated upstream
-=======
 [ext_resource type="Script" uid="uid://bda1untpe0br0" path="res://Main Game/house_trigger.gd" id="5_v3n8n"]
 [ext_resource type="Script" uid="uid://dkoosxfhn3ek1" path="res://Main Game/wave_manager.gd" id="6_kmnlm"]
 [ext_resource type="PackedScene" uid="uid://c5cwrbhh2jfap" path="res://plants/peashooter.tscn" id="6_kpq5x"]
->>>>>>> Stashed changes
+=======
+[ext_resource type="Script" uid="uid://bda1untpe0br0" path="res://Main Game/house_trigger.gd" id="5_v3n8n"]
+[ext_resource type="Script" uid="uid://dkoosxfhn3ek1" path="res://Main Game/wave_manager.gd" id="6_kmnlm"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
@@ -32,6 +33,9 @@ terrain_set_0/mode = 0
 sources/1 = SubResource("TileSetAtlasSource_eb883")
 sources/2 = SubResource("TileSetAtlasSource_l52a5")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uj04i"]
+size = Vector2(64, 640)
+
 [node name="Node2D" type="Node2D" unique_id=178753730]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1818240329]
@@ -42,8 +46,6 @@ script = ExtResource("3_v3n8n")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=174855986]
 position = Vector2(566, 209)
 zoom = Vector2(0.75, 0.75)
-<<<<<<< Updated upstream
-=======
 
 [node name="HouseTrigger" type="Area2D" parent="." unique_id=1436881547]
 collision_layer = 8
@@ -66,4 +68,3 @@ position = Vector2(8, 270)
 
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]
->>>>>>> Stashed changes

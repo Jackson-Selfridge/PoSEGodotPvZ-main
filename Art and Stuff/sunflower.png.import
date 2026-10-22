@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtwj8wp02mlux"
-valid=false
+uid="uid://7drae0c2i058"
+path="res://.godot/imported/sunflower.png-c9f8a999304e877e256ef2e41ae0b329.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Art and Stuff/sunflower.png"
+dest_files=["res://.godot/imported/sunflower.png-c9f8a999304e877e256ef2e41ae0b329.ctex"]
 
 [params]
 

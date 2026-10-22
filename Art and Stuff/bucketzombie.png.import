@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbdot4brj77bg"
-valid=false
+uid="uid://c3r46d3loyi7i"
+path="res://.godot/imported/bucketzombie.png-bf5b918137d52554420dadd0e19c50db.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Art and Stuff/bucketzombie.png"
+dest_files=["res://.godot/imported/bucketzombie.png-bf5b918137d52554420dadd0e19c50db.ctex"]
 
 [params]
 

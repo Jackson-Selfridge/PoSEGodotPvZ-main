@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1ym4wkkvfo0s"
-valid=false
+uid="uid://c2s5gqud4lqao"
+path="res://.godot/imported/suncollectable.png-dc1a915cc2e9b8cc9bc50045f1e6ff55.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Art and Stuff/suncollectable.png"
+dest_files=["res://.godot/imported/suncollectable.png-dc1a915cc2e9b8cc9bc50045f1e6ff55.ctex"]
 
 [params]
 

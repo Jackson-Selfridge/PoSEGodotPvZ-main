@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhqqhlc74kbe7"
-valid=false
+uid="uid://dl6edhgyrxpil"
+path="res://.godot/imported/peashooter.png-a9c92c1ea6c7ce16a25d066c2f9c5386.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Art and Stuff/peashooter.png"
+dest_files=["res://.godot/imported/peashooter.png-a9c92c1ea6c7ce16a25d066c2f9c5386.ctex"]
 
 [params]
 
