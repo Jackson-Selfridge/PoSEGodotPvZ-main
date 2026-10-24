@@ -17,7 +17,12 @@ func _on_body_entered(body: Node2D):
 
 		game_over.emit()
 		wave_manager.stop_game()
-		for zombie in get_tree().get_nodes_in_group("zombies"):
-			zombie.game_over = true
-			
-		get_tree().change_scene_to_file("res://Main Menu/gameover.tscn")
+
+		get_tree().create_timer(2.0).timeout.connect(_on_game_over_timer_timeout)
+
+
+func _on_game_over_timer_timeout():
+	get_tree().call_deferred(
+		"change_scene_to_file",
+        "res://Main Menu/gameover.tscn"
+	)

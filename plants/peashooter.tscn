@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c5cwrbhh2jfap"]
+[gd_scene format=3 uid="uid://bx5ws6pop7mam"]
 
 [ext_resource type="Script" uid="uid://dm0umwqfog3y1" path="res://plants/peashooter.gd" id="1_756y6"]
 [ext_resource type="Texture2D" uid="uid://dl6edhgyrxpil" path="res://Art and Stuff/peashooter.png" id="1_ioakc"]

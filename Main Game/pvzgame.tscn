@@ -6,10 +6,6 @@
 [ext_resource type="Script" uid="uid://bda1untpe0br0" path="res://Main Game/house_trigger.gd" id="5_v3n8n"]
 [ext_resource type="Script" uid="uid://dkoosxfhn3ek1" path="res://Main Game/wave_manager.gd" id="6_kmnlm"]
 [ext_resource type="PackedScene" uid="uid://c5cwrbhh2jfap" path="res://plants/peashooter.tscn" id="6_kpq5x"]
-=======
-[ext_resource type="Script" uid="uid://bda1untpe0br0" path="res://Main Game/house_trigger.gd" id="5_v3n8n"]
-[ext_resource type="Script" uid="uid://dkoosxfhn3ek1" path="res://Main Game/wave_manager.gd" id="6_kmnlm"]
-
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
