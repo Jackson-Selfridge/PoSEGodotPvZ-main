@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c5cwrbhh2jfap"]
+
+[ext_resource type="Script" uid="uid://dm0umwqfog3y1" path="res://plants/peashooter.gd" id="1_756y6"]
+[ext_resource type="Texture2D" uid="uid://dl6edhgyrxpil" path="res://Art and Stuff/peashooter.png" id="1_ioakc"]
+[ext_resource type="PackedScene" uid="uid://ci561nmn76m4m" path="res://plants/pea.tscn" id="2_mwx0c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wsnoc"]
+size = Vector2(1105, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g36yv"]
+size = Vector2(140.09949, 162.89362)
+
+[node name="Peashooter" type="Node2D" unique_id=1792810890]
+position = Vector2(-50, -48)
+script = ExtResource("1_756y6")
+pea_scene = ExtResource("2_mwx0c")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1967361499]
+position = Vector2(51.749996, 46.999992)
+scale = Vector2(0.5710228, 0.53409094)
+texture = ExtResource("1_ioakc")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1718832296]
+position = Vector2(86, 26)
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=40919302]
+autostart = true
+
+[node name="SightArea" type="Area2D" parent="." unique_id=1847654160]
+position = Vector2(-7, 5)
+
+[node name="SightBox" type="CollisionShape2D" parent="SightArea" unique_id=1813738107]
+position = Vector2(628.5, 44)
+shape = SubResource("RectangleShape2D_wsnoc")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=544073582]
+
+[node name="HurtBox2D" type="CollisionShape2D" parent="HurtBox" unique_id=1895516591]
+position = Vector2(50, 47.5)
+scale = Vector2(0.5710228, 0.53409094)
+shape = SubResource("RectangleShape2D_g36yv")

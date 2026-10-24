@@ -1,3 +1,4 @@
+class_name Lawn
 extends TileMapLayer
 # This is a comment, testing git
 const ROWS := 5
