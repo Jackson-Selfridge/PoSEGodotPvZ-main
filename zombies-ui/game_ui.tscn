@@ -1,10 +1,15 @@
 [gd_scene format=3 uid="uid://ce53hrktvprcx"]
 
+[ext_resource type="Script" uid="uid://waotvrf46qni" path="res://game_ui.gd" id="1_ue6oa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dln8t"]
+
 [node name="GameUI" type="Control" unique_id=267182535]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_ue6oa")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1025618203]
 layout_mode = 0
@@ -54,3 +59,48 @@ offset_left = 370.0
 offset_top = 4.0
 offset_right = 440.0
 offset_bottom = 74.0
+
+[node name="ContinuePopup" type="Panel" parent="." unique_id=1998247051]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 140.0
+offset_right = 825.0
+offset_bottom = 440.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dln8t")
+
+[node name="Title" type="Label" parent="ContinuePopup" unique_id=722831824]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 28.0
+offset_right = 397.0
+offset_bottom = 115.0
+theme_override_font_sizes/font_size = 30
+text = "CONTINUE GAME?
+"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="ContinuePopup" unique_id=208317740]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 99.0
+offset_right = 463.0
+offset_bottom = 148.0
+text = "DO YOU WANT TO CONTINUE YOUR CURRENT GAME 
+OR RESTART THE LEVEL?"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="ContinuePopup" unique_id=2044719009]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 190.0
+offset_right = 231.0
+offset_bottom = 235.0
+text = "CONTINUE"
+
+[node name="RestartButton" type="Button" parent="ContinuePopup" unique_id=339624826]
+layout_mode = 0
+offset_left = 279.0
+offset_top = 190.0
+offset_right = 449.0
+offset_bottom = 235.0
+text = "RESTART LEVEL"
