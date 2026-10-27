@@ -7,7 +7,7 @@
 size = Vector2(64, 131)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p5viw"]
-size = Vector2(100, 60)
+size = Vector2(30, 60)
 
 [node name="Zombie" type="CharacterBody2D" unique_id=761601910]
 collision_layer = 2
@@ -22,13 +22,17 @@ position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_uj04i")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1130335254]
-collision_layer = 0
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=664408110]
-position = Vector2(-50, 0)
+position = Vector2(-35, 0)
 shape = SubResource("RectangleShape2D_p5viw")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=198991000]
+one_shot = true
 
+[connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
+[connection signal="area_exited" from="AttackArea" to="." method="_on_attack_area_area_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://d2vjvwq063hop" path="res://Main Game/checkerboard.gd" id="3_v3n8n"]
 [ext_resource type="Script" uid="uid://bda1untpe0br0" path="res://Main Game/house_trigger.gd" id="5_v3n8n"]
 [ext_resource type="Script" uid="uid://dkoosxfhn3ek1" path="res://Main Game/wave_manager.gd" id="6_kmnlm"]
-[ext_resource type="PackedScene" uid="uid://c5cwrbhh2jfap" path="res://plants/peashooter.tscn" id="6_kpq5x"]
+[ext_resource type="PackedScene" uid="uid://bx5ws6pop7mam" path="res://plants/peashooter.tscn" id="6_kpq5x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
@@ -59,8 +59,8 @@ script = ExtResource("6_kmnlm")
 wait_time = 3.0
 autostart = true
 
-[node name="Peashooter" parent="." unique_id=476203373 instance=ExtResource("6_kpq5x")]
-position = Vector2(8, 270)
+[node name="Peashooter" parent="." unique_id=1792810890 instance=ExtResource("6_kpq5x")]
+position = Vector2(0, 128)
 
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]

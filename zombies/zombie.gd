@@ -22,6 +22,7 @@ func _physics_process(_delta):
 	if is_dead or game_over:
 		velocity= Vector2.ZERO
 		return
+			
 	if is_instance_valid(current_target):
 		velocity =Vector2.ZERO
 	else:
@@ -50,9 +51,11 @@ func die():
 	queue_free()
 
 
-func _on_attack_area_body_entered(body: Node2D):
-	if body.is_in_group("plants"):
-		current_target = body
+func _on_attack_area_body_entered(area: Node2D):
+	var plant = area.get_parent()
+	if plant.is_in_group("plants"):
+		current_target = plant
+	if $AttackTime.is_stopped():
 		$AttackTimer.start()
 		#Add it to plants group
 
@@ -62,9 +65,29 @@ func _on_attack_area_body_exited(body: Node2D):
 		current_target = null
 		$AttackTimer.stop()
 
+func _on_attack_area_area_entered(area: Area2D) -> void:
+	var plant = area.get_parent()
+	
+	if plant.is_in_group("plants"):
+		current_target = plant
+	if $AttackTimer.is_stopped():
+		$AttackTimer.start()
+	
+	
+	
+	
+func _on_attack_area_area_exited(area:Area2D)-> void:
+	var plant = area.get_parent()
+	if plant == current_target:
+		current_target = null
+		$AttackTimer.stop()
+
 func _on_attack_timer_timeout():
 	if not is_instance_valid(current_target):
 		$AttackTimer.stop()
 		return
 	if current_target.has_method("take_damage"):
 		current_target.take_damage(attack_damage)
+		$AttackTimer.start()
+	else:
+		$AttackTimer.stop()

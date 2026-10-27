@@ -2,12 +2,16 @@ extends Node2D
 
 @export var pea_scene: PackedScene
 @export var shoot_interval := 1.5
+@export var max_health: float=100.00
+var current_health:float
 
 @onready var sight: Area2D = $SightArea
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var muzzle: Marker2D = $Muzzle
 
 func _ready() -> void:
+	current_health=max_health
+	add_to_group("plants")
 	shoot_timer.wait_time = shoot_interval
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 
@@ -34,3 +38,14 @@ func _shoot() -> void:
 	# Add to the level, not the plant, so peas keep flying if the plant dies
 	get_parent().add_child(pea)
 	pea.global_position = muzzle.global_position
+	
+func take_damage(amount:float)-> void:
+	current_health -= amount
+	print("Peashooter health: ", current_health)
+
+	if current_health <= 0:
+		die()
+
+func die() -> void:
+	print("Peashooter destroyed!")
+	queue_free()
