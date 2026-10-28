@@ -5,15 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://x5otwexajhin" path="res://plants/sun.tscn" id="2_1v8gv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1v8gv"]
-size = Vector2(123, 140)
+size = Vector2(93.5, 105)
 
 [node name="Sunflower" type="Node2D" unique_id=798214775]
 script = ExtResource("1_1cqdq")
 sun_scene = ExtResource("2_1v8gv")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=256778743]
-position = Vector2(-2.000002, -2.0000038)
-scale = Vector2(0.6730769, 0.6527778)
+position = Vector2(-3.8146973e-06, 1)
+scale = Vector2(0.5096154, 0.5023148)
 texture = ExtResource("1_4tdq0")
 
 [node name="SunSpawnPoint" type="Marker2D" parent="." unique_id=1156926279]
@@ -26,5 +26,5 @@ one_shot = true
 position = Vector2(-1, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=841402861]
-position = Vector2(-1.5, 1)
+position = Vector2(2, 5)
 shape = SubResource("RectangleShape2D_1v8gv")
