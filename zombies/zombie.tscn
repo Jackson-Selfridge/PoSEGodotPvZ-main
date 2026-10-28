@@ -9,6 +9,9 @@ size = Vector2(64, 131)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p5viw"]
 size = Vector2(30, 60)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jc63w"]
+size = Vector2(40, 40)
+
 [node name="Zombie" type="CharacterBody2D" unique_id=761601910]
 collision_layer = 2
 script = ExtResource("1_hj6kr")
@@ -30,6 +33,13 @@ shape = SubResource("RectangleShape2D_p5viw")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=198991000]
 one_shot = true
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1368520747]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1685910481]
+shape = SubResource("RectangleShape2D_jc63w")
 
 [connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
 [connection signal="area_exited" from="AttackArea" to="." method="_on_attack_area_area_exited"]
