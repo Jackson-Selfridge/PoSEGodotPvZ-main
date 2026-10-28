@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://brjocn36dmugd"]
+
+[ext_resource type="Texture2D" uid="uid://dl6edhgyrxpil" path="res://Art and Stuff/peashooter.png" id="1_ioakc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g36yv"]
+size = Vector2(140.09949, 162.89362)
+
+[node name="Plant1" type="CharacterBody2D" unique_id=476203373]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1967361499]
+position = Vector2(51.749996, 46.999992)
+scale = Vector2(0.5710228, 0.53409094)
+texture = ExtResource("1_ioakc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1895516591]
+position = Vector2(50, 47.5)
+scale = Vector2(0.5710228, 0.53409094)
+shape = SubResource("RectangleShape2D_g36yv")
