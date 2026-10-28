@@ -64,7 +64,7 @@ autostart = true
 position = Vector2(145, 127)
 
 [node name="Sunflower" parent="." unique_id=798214775 instance=ExtResource("7_kpq5x")]
-position = Vector2(63, 505)
+position = Vector2(63, 567)
 
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]
