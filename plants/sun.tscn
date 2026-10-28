@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://x5otwexajhin"]
+
+[ext_resource type="Script" uid="uid://nydsjjfuye1e" path="res://plants/sun.gd" id="1_rf3ex"]
+[ext_resource type="Texture2D" uid="uid://c2s5gqud4lqao" path="res://Art and Stuff/suncollectable.png" id="2_gn5jh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wsnoc"]
+radius = 147.21753
+
+[node name="Sun" type="Area2D" unique_id=543447354]
+z_index = 1
+script = ExtResource("1_rf3ex")
+
+[node name="SunSprite" type="Sprite2D" parent="." unique_id=555060765]
+texture = ExtResource("2_gn5jh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1975721206]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_wsnoc")

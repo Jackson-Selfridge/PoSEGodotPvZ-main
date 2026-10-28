@@ -1,17 +1,25 @@
 [gd_scene format=3 uid="uid://neg8nckoxvm0"]
 
+[ext_resource type="Script" uid="uid://bw8v85qvf1mih" path="res://plants/sunflower.gd" id="1_1cqdq"]
 [ext_resource type="Texture2D" uid="uid://7drae0c2i058" path="res://Art and Stuff/sunflower.png" id="1_4tdq0"]
+[ext_resource type="PackedScene" uid="uid://x5otwexajhin" path="res://plants/sun.tscn" id="2_1v8gv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wsnoc"]
 size = Vector2(164, 199)
 
-[node name="Sunflower" type="CharacterBody2D" unique_id=1018910262]
+[node name="Sunflower" type="Node2D" unique_id=798214775]
+script = ExtResource("1_1cqdq")
+sun_scene = ExtResource("2_1v8gv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=256778743]
 texture = ExtResource("1_4tdq0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=841402861]
+[node name="SunSpawnPoint" type="Marker2D" parent="." unique_id=1156926279]
+
+[node name="SunTimer" type="Timer" parent="." unique_id=539574075]
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=187445148]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=841402861]
 position = Vector2(-2, -0.5)
 shape = SubResource("RectangleShape2D_wsnoc")
-
-[node name="Marker2D" type="Marker2D" parent="." unique_id=1156926279]
