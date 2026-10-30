@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dkoosxfhn3ek1" path="res://Main Game/wave_manager.gd" id="6_kmnlm"]
 [ext_resource type="PackedScene" uid="uid://bx5ws6pop7mam" path="res://plants/peashooter.tscn" id="6_kpq5x"]
 [ext_resource type="PackedScene" uid="uid://neg8nckoxvm0" path="res://plants/sunflower.tscn" id="7_kpq5x"]
+[ext_resource type="Script" uid="uid://bk5qj205vaosn" path="res://Main Game/plant_placement.gd" id="8_85v1m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
@@ -61,10 +62,15 @@ wait_time = 3.0
 autostart = true
 
 [node name="Peashooter" parent="." unique_id=1792810890 instance=ExtResource("6_kpq5x")]
-position = Vector2(17, 140)
+position = Vector2(58, 191)
 
 [node name="Sunflower" parent="." unique_id=798214775 instance=ExtResource("7_kpq5x")]
 position = Vector2(300, 182)
+
+[node name="PlantPlacement" type="Node2D" parent="." unique_id=1976489846 node_paths=PackedStringArray("lawn")]
+script = ExtResource("8_85v1m")
+lawn = NodePath("../TileMapLayer")
+peashooter_scene = ExtResource("6_kpq5x")
 
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]
