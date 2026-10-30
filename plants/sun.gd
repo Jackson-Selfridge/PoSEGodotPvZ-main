@@ -40,5 +40,5 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 func _collect() -> void:
 	_collected = true
 	collected.emit(value)
-	print("Collected ", value, " sun")  # placeholder until the bank exists
+	SunBank.add(value)
 	queue_free()
