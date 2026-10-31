@@ -10,7 +10,7 @@ size = Vector2(64, 131)
 size = Vector2(30, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jc63w"]
-size = Vector2(40, 40)
+size = Vector2(50, 60)
 
 [node name="Zombie" type="CharacterBody2D" unique_id=761601910]
 collision_layer = 2

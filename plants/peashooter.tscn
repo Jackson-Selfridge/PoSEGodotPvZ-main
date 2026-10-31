@@ -19,7 +19,7 @@ scale = Vector2(0.5710228, 0.53409094)
 texture = ExtResource("1_ioakc")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1718832296]
-position = Vector2(86, 26)
+position = Vector2(0, -30)
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=40919302]
 autostart = true
@@ -30,7 +30,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="SightBox" type="CollisionShape2D" parent="SightArea" unique_id=1813738107]
-position = Vector2(566, -2)
+position = Vector2(591, -6)
 shape = SubResource("RectangleShape2D_wsnoc")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=544073582]

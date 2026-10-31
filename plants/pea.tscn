@@ -7,7 +7,7 @@
 size = Vector2(33, 31)
 
 [node name="Pea" type="Area2D" unique_id=1692852217]
-position = Vector2(-16, -14)
+position = Vector2(-17, -15)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_03xce")

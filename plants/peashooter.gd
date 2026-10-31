@@ -24,7 +24,7 @@ func setup(cell: Vector2i, lawn: Lawn) -> void:
 	var shape := RectangleShape2D.new()
 	shape.size = Vector2(width, tile_size.y * 0.8)  # a bit shorter than the lane
 	
-	var col_shape: CollisionShape2D = $SightArea/CollisionShape2D
+	var col_shape: CollisionShape2D = $SightArea/SightBox
 	col_shape.shape = shape
 	# Plant origin is the tile center, so shift the box to start at this tile's left edge
 	col_shape.position = Vector2(width / 2.0 - tile_size.x / 2.0, 0)
