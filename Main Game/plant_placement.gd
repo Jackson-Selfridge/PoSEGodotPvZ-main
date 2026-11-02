@@ -66,7 +66,8 @@ func place_plant() ->void:
 		print("This cell is occupied")
 		return
 	#Place the plant
-	preview.setup(cell,lawn)
+	if preview.has_method("setup"):
+		preview.setup(cell,lawn)
 	occupied_cells[cell]=true
 	print("Plant placed at:", cell)
 	#Remove the preview reference

@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bx5ws6pop7mam" path="res://plants/peashooter.tscn" id="6_kpq5x"]
 [ext_resource type="PackedScene" uid="uid://neg8nckoxvm0" path="res://plants/sunflower.tscn" id="7_kpq5x"]
 [ext_resource type="Script" uid="uid://bk5qj205vaosn" path="res://Main Game/plant_placement.gd" id="8_85v1m"]
+[ext_resource type="Texture2D" uid="uid://dl6edhgyrxpil" path="res://Art and Stuff/peashooter.png" id="9_k6j0y"]
+[ext_resource type="Texture2D" uid="uid://7drae0c2i058" path="res://Art and Stuff/sunflower.png" id="10_7qdmu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
@@ -43,7 +45,7 @@ script = ExtResource("3_v3n8n")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=174855986]
 position = Vector2(566, 209)
-zoom = Vector2(0.75, 0.75)
+zoom = Vector2(0.5, 0.5)
 
 [node name="HouseTrigger" type="Area2D" parent="." unique_id=1436881547]
 collision_layer = 8
@@ -80,6 +82,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -860.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -89,9 +92,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -8.0
-offset_right = 48.0
-offset_bottom = 92.0
+offset_top = -232.0
+offset_right = 7.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -100,9 +103,12 @@ layout_mode = 2
 
 [node name="PeashooterButton" type="Button" parent="UI/UIContainer/PlantPanel/HBoxContainer" unique_id=928439123]
 layout_mode = 2
+icon = ExtResource("9_k6j0y")
 
 [node name="SunflowerButton" type="Button" parent="UI/UIContainer/PlantPanel/HBoxContainer" unique_id=1994406059]
 layout_mode = 2
+offset_transform_enabled = true
+icon = ExtResource("10_7qdmu")
 
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]

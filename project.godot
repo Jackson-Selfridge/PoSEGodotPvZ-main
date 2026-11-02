@@ -21,6 +21,7 @@ SunBank="*uid://du8awhljh77hr"
 
 [display]
 
+window/size/viewport_height=860
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
