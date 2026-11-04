@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bx5ws6pop7mam" path="res://plants/peashooter.tscn" id="6_kpq5x"]
 [ext_resource type="PackedScene" uid="uid://neg8nckoxvm0" path="res://plants/sunflower.tscn" id="7_kpq5x"]
 [ext_resource type="Script" uid="uid://bk5qj205vaosn" path="res://Main Game/plant_placement.gd" id="8_85v1m"]
-[ext_resource type="Texture2D" uid="uid://dl6edhgyrxpil" path="res://Art and Stuff/peashooter.png" id="9_k6j0y"]
 [ext_resource type="Texture2D" uid="uid://7drae0c2i058" path="res://Art and Stuff/sunflower.png" id="10_7qdmu"]
+[ext_resource type="Script" uid="uid://3d4f2e1l6tpx" path="res://Main Game/sun_counter.gd" id="10_k6j0y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
@@ -35,6 +35,9 @@ sources/2 = SubResource("TileSetAtlasSource_l52a5")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uj04i"]
 size = Vector2(64, 640)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j63aa"]
+load_path = "res://.godot/imported/peashooter.png-a9c92c1ea6c7ce16a25d066c2f9c5386.ctex"
 
 [node name="Node2D" type="Node2D" unique_id=178753730]
 
@@ -63,12 +66,6 @@ script = ExtResource("6_kmnlm")
 wait_time = 3.0
 autostart = true
 
-[node name="Peashooter" parent="." unique_id=1792810890 instance=ExtResource("6_kpq5x")]
-position = Vector2(58, 191)
-
-[node name="Sunflower" parent="." unique_id=798214775 instance=ExtResource("7_kpq5x")]
-position = Vector2(300, 182)
-
 [node name="PlantPlacement" type="Node2D" parent="." unique_id=1976489846 node_paths=PackedStringArray("lawn")]
 script = ExtResource("8_85v1m")
 lawn = NodePath("../TileMapLayer")
@@ -76,6 +73,7 @@ peashooter_scene = ExtResource("6_kpq5x")
 sunflower_scene = ExtResource("7_kpq5x")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=430044349]
+follow_viewport_enabled = true
 
 [node name="UIContainer" type="Control" parent="UI" unique_id=2040125522]
 layout_mode = 3
@@ -100,15 +98,33 @@ grow_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/PlantPanel" unique_id=94874786]
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="PeashooterButton" type="Button" parent="UI/UIContainer/PlantPanel/HBoxContainer" unique_id=928439123]
+custom_minimum_size = Vector2(150, 70)
 layout_mode = 2
-icon = ExtResource("9_k6j0y")
+icon = SubResource("CompressedTexture2D_j63aa")
+expand_icon = true
 
 [node name="SunflowerButton" type="Button" parent="UI/UIContainer/PlantPanel/HBoxContainer" unique_id=1994406059]
+custom_minimum_size = Vector2(150, 70)
 layout_mode = 2
 offset_transform_enabled = true
 icon = ExtResource("10_7qdmu")
+expand_icon = true
+
+[node name="SunCounter" type="PanelContainer" parent="UI/UIContainer" unique_id=913157316]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 1
+offset_right = 20.0
+offset_bottom = 23.0
+script = ExtResource("10_k6j0y")
+
+[node name="SunLabel" type="Label" parent="UI/UIContainer/SunCounter" unique_id=1598281404]
+layout_mode = 2
+text = "☀️50"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]

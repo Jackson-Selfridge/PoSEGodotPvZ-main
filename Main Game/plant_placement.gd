@@ -3,6 +3,9 @@ extends Node2D
 @export var lawn: Lawn
 @export var peashooter_scene: PackedScene
 @export var sunflower_scene: PackedScene
+const PEASHOOTER_COST:=100
+const SUNFLOWER_COST:=50
+var selected_plant_cost: int=0
 @onready var peashooter_button: Button=get_node("../UI/UIContainer/PlantPanel/HBoxContainer/PeashooterButton")
 @onready var sunflower_button: Button = get_node("../UI/UIContainer/PlantPanel/HBoxContainer/SunflowerButton")
 
@@ -21,8 +24,10 @@ func _ready() -> void:
 	sunflower_button.pressed.connect(_on_sunflower_button_pressed)
 
 func _on_peashooter_button_pressed()->void:
+	selected_plant_cost=PEASHOOTER_COST
 	start_plant_preview(peashooter_scene)
 func _on_sunflower_button_pressed()->void:
+	selected_plant_cost=SUNFLOWER_COST
 	start_plant_preview(sunflower_scene)
 
 func _process(_delta: float) -> void:
@@ -45,9 +50,6 @@ func get_mouse_cell()->Vector2i:
 	return lawn.local_to_map(mouse_position)
 
 func _input(event: InputEvent) -> void:
-	#Press letter P to select a Peashooter
-	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
-		start_plant_preview(peashooter_scene)
 	#Press the left click to place the plant
 	if event is InputEventMouseButton:
 		if event.button_index==MOUSE_BUTTON_LEFT and event.pressed:
@@ -64,6 +66,13 @@ func place_plant() ->void:
 	#Check if the cell is occupied
 	if occupied_cells.has(cell):
 		print("This cell is occupied")
+		return
+	#Check if the player has enough sun
+	if not SunBank.can_afford(selected_plant_cost):
+		print("Not enough sun")
+		return
+	#Spend the sun
+	if not SunBank.try_spend(selected_plant_cost):
 		return
 	#Place the plant
 	if preview.has_method("setup"):
