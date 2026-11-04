@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dopwmcgk15m7v"]
+
+[ext_resource type="Script" uid="uid://cybck1ne4k71e" path="res://plants/iceberg.gd" id="1_e14so"]
+
+[node name="Cabbage" type="Node2D" unique_id=1624808190]
+script = ExtResource("1_e14so")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2133221256]
