@@ -24,6 +24,7 @@ one_shot = true
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=187445148]
 position = Vector2(-1, -1)
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=841402861]
 position = Vector2(2, 5)

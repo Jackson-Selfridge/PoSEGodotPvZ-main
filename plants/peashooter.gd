@@ -4,6 +4,7 @@ extends Node2D
 @export var shoot_interval := 1.5
 @export var max_health: float=100.00
 var current_health:float
+var is_placed:bool=false
 
 @onready var sight: Area2D = $SightArea
 @onready var shoot_timer: Timer = $ShootTimer
@@ -11,9 +12,11 @@ var current_health:float
 
 func _ready() -> void:
 	current_health=max_health
-	add_to_group("plants")
 	shoot_timer.wait_time = shoot_interval
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	
+	shoot_timer.stop()
+	sight.monitoring=false
 
 # Call this right after instancing, with the cell it was planted in.
 func setup(cell: Vector2i, lawn: Lawn) -> void:
@@ -28,8 +31,14 @@ func setup(cell: Vector2i, lawn: Lawn) -> void:
 	col_shape.shape = shape
 	# Plant origin is the tile center, so shift the box to start at this tile's left edge
 	col_shape.position = Vector2(width / 2.0 - tile_size.x / 2.0, 0)
+	is_placed=true
+	add_to_group("plants")
+	sight.monitoring=true
+	shoot_timer.start()
 
 func _on_shoot_timer_timeout() -> void:
+	if not is_placed:
+		return
 	if sight.has_overlapping_areas():
 		_shoot()
 
@@ -40,6 +49,8 @@ func _shoot() -> void:
 	pea.global_position = muzzle.global_position
 	
 func take_damage(amount:float)-> void:
+	if not is_placed:
+		return
 	current_health -= amount
 	print("Peashooter health: ", current_health)
 
