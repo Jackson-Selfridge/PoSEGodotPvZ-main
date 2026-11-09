@@ -35,6 +35,10 @@ func _process(_delta: float) -> void:
 		var cell:=get_mouse_cell()
 		var cell_position=lawn.to_global(lawn.map_to_local(cell))
 		preview.global_position = cell_position
+		if can_place_plant(cell):
+			preview.modulate=Color(0.4,1.0,0.4,0.5)
+		else:
+			preview.modulate=Color(1.0,0.3,0.3,0.5)
 
 func start_plant_preview(plant_scene:PackedScene) -> void:
 	if plant_scene == null:
@@ -48,28 +52,47 @@ func start_plant_preview(plant_scene:PackedScene) -> void:
 func get_mouse_cell()->Vector2i:
 	var mouse_position= lawn.to_local(get_global_mouse_position())
 	return lawn.local_to_map(mouse_position)
+func can_place_plant(cell:Vector2i)->bool:
+	if cell.x<0 or cell.x >=lawn.COLS:
+		return false
+	if cell.y<0 or cell.y >=lawn.ROWS:
+		return false
+	if occupied_cells.has(cell):
+		return false
+	if not SunBank.can_afford(selected_plant_cost):
+		return false
+	return true
 
 func _input(event: InputEvent) -> void:
-	#Press the left click to place the plant
+	if preview==null:
+		return
+	#Cancel with right mouse button
 	if event is InputEventMouseButton:
+		if event.button_index==MOUSE_BUTTON_RIGHT and event.pressed:
+			cancel_plant_preview()
+			return
+		#Place with left mouse button
 		if event.button_index==MOUSE_BUTTON_LEFT and event.pressed:
 			place_plant()
-
+	# Cancel with ESC
+	if event is InputEventKey:
+		if event.keycode== KEY_ESCAPE and event.pressed and not event.echo:
+			cancel_plant_preview()
+func cancel_plant_preview()->void:
+	if preview !=null:
+		preview.queue_free()
+		preview=null
+	selected_plant_cost=0
+	print("Plant selection cancelled")
+	
+	
+	
 func place_plant() ->void:
 	if preview ==null:
 		return
 	var cell:=get_mouse_cell()
-	#Check if the cell is inside the lawn
-	if cell.x<0 or cell.x>=lawn.COLS or cell.y<0 or cell.y>=lawn.ROWS:
-		print("Cannot plant outside the lawn")
-		return
-	#Check if the cell is occupied
-	if occupied_cells.has(cell):
-		print("This cell is occupied")
-		return
-	#Check if the player has enough sun
-	if not SunBank.can_afford(selected_plant_cost):
-		print("Not enough sun")
+	if not can_place_plant(cell):
+		print("Cannot place plant here")
 		return
 	#Spend the sun
 	if not SunBank.try_spend(selected_plant_cost):
@@ -78,7 +101,10 @@ func place_plant() ->void:
 	if preview.has_method("setup"):
 		preview.setup(cell,lawn)
 	occupied_cells[cell]=true
+	#Restore normal appearance after placement
+	preview.modulate=Color.WHITE
 	print("Plant placed at:", cell)
 	#Remove the preview reference
 	preview=null
+	selected_plant_cost=0
 	
