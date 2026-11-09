@@ -3,9 +3,16 @@ extends Node2D
 @export var lawn: Lawn
 @export var peashooter_scene: PackedScene
 @export var sunflower_scene: PackedScene
+
 const PEASHOOTER_COST:=100
 const SUNFLOWER_COST:=50
+const PEASHOOTER_COOLDOWN:=2.0
+const SUNFLOWER_COOLDOWN:=2.0
+
+var peashooter_cooldown_timer: float=0.0
+var sunflower_cooldown_timer: float=0.0
 var selected_plant_cost: int=0
+
 @onready var peashooter_button: Button=get_node("../UI/UIContainer/PlantPanel/HBoxContainer/PeashooterButton")
 @onready var sunflower_button: Button = get_node("../UI/UIContainer/PlantPanel/HBoxContainer/SunflowerButton")
 
@@ -24,13 +31,45 @@ func _ready() -> void:
 	sunflower_button.pressed.connect(_on_sunflower_button_pressed)
 
 func _on_peashooter_button_pressed()->void:
+	if peashooter_cooldown_timer>0:
+		return
 	selected_plant_cost=PEASHOOTER_COST
 	start_plant_preview(peashooter_scene)
+	
 func _on_sunflower_button_pressed()->void:
+	if sunflower_cooldown_timer>0:
+		return
 	selected_plant_cost=SUNFLOWER_COST
 	start_plant_preview(sunflower_scene)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	#Update Peashooter cooldown timer
+	if peashooter_cooldown_timer>0:
+		peashooter_cooldown_timer=maxf(0.0, peashooter_cooldown_timer-delta)
+	#Update Sunflower cooldown timer
+	if sunflower_cooldown_timer>0:
+		sunflower_cooldown_timer=maxf(0.0,sunflower_cooldown_timer-delta)
+	#Update Peashooter button
+	if peashooter_cooldown_timer>0:
+		peashooter_button.disabled=true
+		peashooter_button.modulate=Color(0.5,0.5,0.5,1.0)
+		peashooter_button.text =str(ceili(peashooter_cooldown_timer))
+	else:
+		peashooter_button.disabled=false
+		peashooter_button.modulate=Color.WHITE
+		peashooter_button.text=""
+	
+	#Update Sunflower button
+	if sunflower_cooldown_timer>0:
+		sunflower_button.disabled=true
+		sunflower_button.modulate=Color(0.5,0.5,0.5,1.0)
+		sunflower_button.text=str(ceili(sunflower_cooldown_timer))
+	else:
+		sunflower_button.disabled=false
+		sunflower_button.modulate=Color.WHITE
+		sunflower_button.text=""
+	
+	#Update plant preview
 	if preview != null:
 		var cell:=get_mouse_cell()
 		var cell_position=lawn.to_global(lawn.map_to_local(cell))
@@ -52,6 +91,7 @@ func start_plant_preview(plant_scene:PackedScene) -> void:
 func get_mouse_cell()->Vector2i:
 	var mouse_position= lawn.to_local(get_global_mouse_position())
 	return lawn.local_to_map(mouse_position)
+	
 func can_place_plant(cell:Vector2i)->bool:
 	if cell.x<0 or cell.x >=lawn.COLS:
 		return false
@@ -97,13 +137,22 @@ func place_plant() ->void:
 	#Spend the sun
 	if not SunBank.try_spend(selected_plant_cost):
 		return
+	#Start the corresponding cooldown
+	if selected_plant_cost==PEASHOOTER_COST:
+		peashooter_cooldown_timer=PEASHOOTER_COOLDOWN
+	elif selected_plant_cost==SUNFLOWER_COST:
+		sunflower_cooldown_timer=SUNFLOWER_COOLDOWN
+		
 	#Place the plant
 	if preview.has_method("setup"):
 		preview.setup(cell,lawn)
 	occupied_cells[cell]=true
+	
 	#Restore normal appearance after placement
 	preview.modulate=Color.WHITE
+	
 	print("Plant placed at:", cell)
+	
 	#Remove the preview reference
 	preview=null
 	selected_plant_cost=0
