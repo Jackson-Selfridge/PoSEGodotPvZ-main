@@ -1,8 +1,23 @@
 [gd_scene format=3 uid="uid://dfpt4ip716vge"]
 
+[ext_resource type="Script" uid="uid://p8yqrl1ualn2" path="res://plants/icebergpult.gd" id="1_h7lo8"]
+[ext_resource type="Texture2D" uid="uid://c6obyeyu54q2s" path="res://Art and Stuff/icebergpult.png" id="1_qq182"]
+[ext_resource type="PackedScene" uid="uid://dopwmcgk15m7v" path="res://plants/iceberg.tscn" id="2_pvv83"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7lo8"]
+size = Vector2(1067.5, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvv83"]
+size = Vector2(89, 79)
+
 [node name="Icebergpult" type="Node2D" unique_id=1213749123]
+script = ExtResource("1_h7lo8")
+projectile_scene = ExtResource("2_pvv83")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=12785600]
+position = Vector2(0, 1)
+scale = Vector2(0.11759869, 0.11225329)
+texture = ExtResource("1_qq182")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1472874672]
 
@@ -11,7 +26,11 @@
 [node name="SightArea" type="Area2D" parent="." unique_id=1149711514]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightArea" unique_id=1565598928]
+position = Vector2(551.25, 24)
+shape = SubResource("RectangleShape2D_h7lo8")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=2055808313]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1769495168]
+position = Vector2(13, 25)
+shape = SubResource("RectangleShape2D_pvv83")
