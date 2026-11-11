@@ -27,6 +27,10 @@ func _ready() -> void:
 	else:
 		print("PlantPlacement: Lawn connected successfully.")
 		print("Grid size: ", lawn.COLS, " columns x ", lawn.ROWS, " rows.")
+	
+	peashooter_button.text="☀ 100"
+	sunflower_button.text = "☀ 50"
+	
 	peashooter_button.pressed.connect(_on_peashooter_button_pressed)
 	sunflower_button.pressed.connect(_on_sunflower_button_pressed)
 
@@ -53,21 +57,29 @@ func _process(delta: float) -> void:
 	if peashooter_cooldown_timer>0:
 		peashooter_button.disabled=true
 		peashooter_button.modulate=Color(0.5,0.5,0.5,1.0)
-		peashooter_button.text =str(ceili(peashooter_cooldown_timer))
+		peashooter_button.text = "☀ 100\n" + str(ceili(peashooter_cooldown_timer))
+	elif not SunBank.can_afford(PEASHOOTER_COST):
+		peashooter_button.disabled=true
+		peashooter_button.modulate=Color(0.5,0.5,0.5,1.0)
+		peashooter_button.text="☀ 100"
 	else:
 		peashooter_button.disabled=false
 		peashooter_button.modulate=Color.WHITE
-		peashooter_button.text=""
+		peashooter_button.text="☀ 100"
 	
 	#Update Sunflower button
 	if sunflower_cooldown_timer>0:
 		sunflower_button.disabled=true
 		sunflower_button.modulate=Color(0.5,0.5,0.5,1.0)
-		sunflower_button.text=str(ceili(sunflower_cooldown_timer))
+		sunflower_button.text="☀ 50\n" +str(ceili(sunflower_cooldown_timer))
+	elif not SunBank.can_afford(SUNFLOWER_COST):
+		sunflower_button.disabled=false
+		sunflower_button.modulate=Color(0.5,0.5,0.5,1.0)
+		sunflower_button.text="☀ 50"
 	else:
 		sunflower_button.disabled=false
 		sunflower_button.modulate=Color.WHITE
-		sunflower_button.text=""
+		sunflower_button.text="☀ 50"
 	
 	#Update plant preview
 	if preview != null:

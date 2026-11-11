@@ -116,8 +116,9 @@ expand_icon = true
 [node name="SunCounter" type="PanelContainer" parent="UI/UIContainer" unique_id=913157316]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 1
-offset_right = 20.0
-offset_bottom = 23.0
+offset_top = -284.0
+offset_right = 150.0
+offset_bottom = -234.0
 script = ExtResource("10_k6j0y")
 
 [node name="SunLabel" type="Label" parent="UI/UIContainer/SunCounter" unique_id=1598281404]
@@ -125,6 +126,16 @@ layout_mode = 2
 text = "☀️50"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WaveLabel" type="Label" parent="UI/UIContainer" unique_id=808794866]
+layout_mode = 0
+offset_left = 192.0
+offset_top = -280.0
+offset_right = 279.0
+offset_bottom = -206.0
+theme_override_font_sizes/font_size = 24
+text = "WAVE 1
+"
 
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]

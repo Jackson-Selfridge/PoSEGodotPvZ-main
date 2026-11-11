@@ -1,8 +1,8 @@
 extends Node2D
 
 @export var sun_scene: PackedScene
-@export var sun_interval := 15.0
-@export var first_sun_delay := 7.0   # the first sun comes out a bit early, like in PvZ
+@export var sun_interval := 7.0
+@export var first_sun_delay := 1.0   # the first sun comes out a bit early, like in PvZ
 @export var max_health:float=100.0
 
 var current_health:float

@@ -8,6 +8,7 @@ var zombie_scene = preload("res://zombies/zombie.tscn")
 @export var initial_zombies: int = 3
 @export var initial_spawn_interval: float = 3.0
 @export var initial_zombie_health: float = 100.0
+@export var initial_spawn_delay:float=12.0
 
 var spawn_x: float = 1000.0
 var lane_positions = [64.0, 192.0, 320.0, 448.0, 576.0]
@@ -18,10 +19,15 @@ var alive_zombies: int = 0
 var spawning: bool = false
 var game_over: bool = false
 
+@onready var wave_label:Label=get_node("../UI/UIContainer/WaveLabel")
 
-func _ready():
+
+func _ready()->void:
+	wave_started.connect(_on_wave_started)
 	$SpawnTimer.wait_time = initial_spawn_interval
 	$SpawnTimer.one_shot = false
+	#Wait before spawning the first zombie
+	await get_tree().create_timer(initial_spawn_delay).timeout
 	$SpawnTimer.start()
 	start_next_wave()
 
@@ -49,8 +55,6 @@ func _on_spawn_timer_timeout():
 
 func spawn_zombie():
 	if zombies_to_spawn <= 0:
-		return
-	if zombies_to_spawn <=0:
 		return
 
 	var zombie = zombie_scene.instantiate()
@@ -104,3 +108,6 @@ func stop_game():
 	spawning = false
 	$SpawnTimer.stop()
 	print("Game Over! Zombie spawning stopped.")
+
+func _on_wave_started(new_wave_number:int)->void:
+	wave_label.text= "WAVE "+str(new_wave_number)
