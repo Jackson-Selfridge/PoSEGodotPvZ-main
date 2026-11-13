@@ -92,7 +92,7 @@ func _process(delta: float) -> void:
 		sunflower_button.modulate=Color(0.5,0.5,0.5,1.0)
 		sunflower_button.text="☀ 50\n" +str(ceili(sunflower_cooldown_timer))
 	elif not SunBank.can_afford(SUNFLOWER_COST):
-		sunflower_button.disabled=false
+		sunflower_button.disabled=true
 		sunflower_button.modulate=Color(0.5,0.5,0.5,1.0)
 		sunflower_button.text="☀ 50"
 	else:

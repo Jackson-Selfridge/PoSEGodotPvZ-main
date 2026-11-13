@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://boqcl4nql3u8a"]
+
+[ext_resource type="Script" uid="uid://ir5whx0imkod" path="res://plants/walnut.gd" id="1_33b2x"]
+[ext_resource type="Texture2D" uid="uid://c6eb1bg8ugroi" path="res://Art and Stuff/walnut.png" id="2_eix65"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wsnoc"]
+size = Vector2(143.75, 132)
+
+[node name="Walnut" type="Node2D" unique_id=1049214355]
+script = ExtResource("1_33b2x")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=158931850]
+position = Vector2(5, 0)
+scale = Vector2(4.8281245, 4.6367188)
+texture = ExtResource("2_eix65")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2143133124]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=491464897]
+position = Vector2(3, 6)
+shape = SubResource("RectangleShape2D_wsnoc")
