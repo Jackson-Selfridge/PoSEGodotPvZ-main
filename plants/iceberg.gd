@@ -27,7 +27,6 @@ func _process(delta: float) -> void:
 	
 	_elapsed += delta
 	var t := minf(_elapsed / _duration, 1.0)
-	$"."
 	var pos := _start.lerp(_end, t)
 	pos.y -= arc_height * 4.0 * t * (1.0 - t)   # parabola, peaks mid-flight
 	global_position = pos

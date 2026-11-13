@@ -3,19 +3,23 @@ extends Node2D
 @export var lawn: Lawn
 @export var peashooter_scene: PackedScene
 @export var sunflower_scene: PackedScene
+@export var icebergpult_scene:PackedScene
 
 const PEASHOOTER_COST:=100
 const SUNFLOWER_COST:=50
 const PEASHOOTER_COOLDOWN:=2.0
 const SUNFLOWER_COOLDOWN:=2.0
+const ICEBERGPULT_COST:=175
+const ICEBERGPULT_COOLDOWN:=3.0
 
 var peashooter_cooldown_timer: float=0.0
 var sunflower_cooldown_timer: float=0.0
+var icebergpult_cooldown_timer:float=0.0
 var selected_plant_cost: int=0
 
 @onready var peashooter_button: Button=get_node("../UI/UIContainer/PlantPanel/HBoxContainer/PeashooterButton")
 @onready var sunflower_button: Button = get_node("../UI/UIContainer/PlantPanel/HBoxContainer/SunflowerButton")
-
+@onready var icebergpult_button: Button = get_node("../UI/UIContainer/PlantPanel/HBoxContainer/IcebergpultButton")
 
 var occupied_cells: Dictionary = {}
 var preview: Node2D=null
@@ -30,10 +34,12 @@ func _ready() -> void:
 	
 	peashooter_button.text="☀ 100"
 	sunflower_button.text = "☀ 50"
+	icebergpult_button.text = "☀ 175"
 	
 	peashooter_button.pressed.connect(_on_peashooter_button_pressed)
 	sunflower_button.pressed.connect(_on_sunflower_button_pressed)
-
+	icebergpult_button.pressed.connect(_on_icebergpult_button_pressed)
+	
 func _on_peashooter_button_pressed()->void:
 	if peashooter_cooldown_timer>0:
 		return
@@ -46,6 +52,15 @@ func _on_sunflower_button_pressed()->void:
 	selected_plant_cost=SUNFLOWER_COST
 	start_plant_preview(sunflower_scene)
 
+func _on_icebergpult_button_pressed()->void:
+	if icebergpult_cooldown_timer > 0:
+		return
+	selected_plant_cost = ICEBERGPULT_COST
+	start_plant_preview(icebergpult_scene)
+
+
+
+
 func _process(delta: float) -> void:
 	#Update Peashooter cooldown timer
 	if peashooter_cooldown_timer>0:
@@ -53,6 +68,10 @@ func _process(delta: float) -> void:
 	#Update Sunflower cooldown timer
 	if sunflower_cooldown_timer>0:
 		sunflower_cooldown_timer=maxf(0.0,sunflower_cooldown_timer-delta)
+	#Update Icebergpult cooldown timer
+	if icebergpult_cooldown_timer>0:
+		icebergpult_cooldown_timer=maxf(0.0,icebergpult_cooldown_timer-delta)
+	
 	#Update Peashooter button
 	if peashooter_cooldown_timer>0:
 		peashooter_button.disabled=true
@@ -80,6 +99,21 @@ func _process(delta: float) -> void:
 		sunflower_button.disabled=false
 		sunflower_button.modulate=Color.WHITE
 		sunflower_button.text="☀ 50"
+	
+	#Update Icebergpult button
+	if icebergpult_cooldown_timer>0:
+		icebergpult_button.disabled=true
+		icebergpult_button.modulate=Color(0.5, 0.5, 0.5, 1.0)
+		icebergpult_button.text="☀ 175\n" + str(ceili(icebergpult_cooldown_timer))
+	elif not SunBank.can_afford(ICEBERGPULT_COST):
+		icebergpult_button.disabled=true
+		icebergpult_button.modulate=Color(0.5, 0.5, 0.5, 1.0)
+		icebergpult_button.text="☀ 175"
+	else:
+		icebergpult_button.disabled=false
+		icebergpult_button.modulate=Color.WHITE
+		icebergpult_button.text="☀ 175"
+	
 	
 	#Update plant preview
 	if preview != null:
@@ -154,7 +188,8 @@ func place_plant() ->void:
 		peashooter_cooldown_timer=PEASHOOTER_COOLDOWN
 	elif selected_plant_cost==SUNFLOWER_COST:
 		sunflower_cooldown_timer=SUNFLOWER_COOLDOWN
-		
+	elif selected_plant_cost==ICEBERGPULT_COST:
+		icebergpult_cooldown_timer=ICEBERGPULT_COOLDOWN
 	#Place the plant
 	if preview.has_method("setup"):
 		preview.setup(cell,lawn)
