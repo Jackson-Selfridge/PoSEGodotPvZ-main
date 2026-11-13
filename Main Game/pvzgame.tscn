@@ -137,5 +137,11 @@ theme_override_font_sizes/font_size = 24
 text = "WAVE 1
 "
 
+[node name="ZombieLabel" type="Label" parent="UI/UIContainer" unique_id=1664596480]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "ON LAWN: 0 | TO SPAWN: 0"
+
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]
