@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://l0fmvkkobjrl" path="res://Art and Stuff/bush.png" id="1_t0dmo"]
 
 [node name="Bush" type="Node2D" unique_id=952856777]
+z_index = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=251552365]
 position = Vector2(17.999998, -11.999999)

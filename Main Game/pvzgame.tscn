@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bk5qj205vaosn" path="res://Main Game/plant_placement.gd" id="8_85v1m"]
 [ext_resource type="Texture2D" uid="uid://7drae0c2i058" path="res://Art and Stuff/sunflower.png" id="10_7qdmu"]
 [ext_resource type="Script" uid="uid://3d4f2e1l6tpx" path="res://Main Game/sun_counter.gd" id="10_k6j0y"]
+[ext_resource type="PackedScene" uid="uid://blx2kygrvf2iy" path="res://state/bush.tscn" id="11_7qdmu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
@@ -142,6 +143,21 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "ON LAWN: 0 | TO SPAWN: 0"
+
+[node name="Bush" parent="." unique_id=952856777 instance=ExtResource("11_7qdmu")]
+position = Vector2(1222, -9)
+
+[node name="Bush2" parent="." unique_id=1481271927 instance=ExtResource("11_7qdmu")]
+position = Vector2(1218, 110)
+
+[node name="Bush3" parent="." unique_id=1309405486 instance=ExtResource("11_7qdmu")]
+position = Vector2(1226, 234)
+
+[node name="Bush4" parent="." unique_id=900054892 instance=ExtResource("11_7qdmu")]
+position = Vector2(1230, 353)
+
+[node name="Bush5" parent="." unique_id=1492320612 instance=ExtResource("11_7qdmu")]
+position = Vector2(1226, 485)
 
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]
