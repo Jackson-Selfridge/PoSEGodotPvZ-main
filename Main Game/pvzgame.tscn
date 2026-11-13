@@ -62,6 +62,7 @@ shape = SubResource("RectangleShape2D_uj04i")
 
 [node name="WaveManager" type="Node" parent="." unique_id=272574409]
 script = ExtResource("6_kmnlm")
+initial_spawn_interval = 5.0
 
 [node name="SpawnTimer" type="Timer" parent="WaveManager" unique_id=1858743052]
 wait_time = 3.0
