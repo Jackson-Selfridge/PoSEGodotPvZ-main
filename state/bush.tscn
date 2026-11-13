@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://blx2kygrvf2iy"]
+
+[ext_resource type="Texture2D" uid="uid://l0fmvkkobjrl" path="res://Art and Stuff/bush.png" id="1_t0dmo"]
+
+[node name="Bush" type="Node2D" unique_id=952856777]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=251552365]
+position = Vector2(17.999998, -11.999999)
+scale = Vector2(5.1666665, 10.5)
+texture = ExtResource("1_t0dmo")
