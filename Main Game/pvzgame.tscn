@@ -11,11 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dfpt4ip716vge" path="res://plants/icebergpult.tscn" id="9_7qdmu"]
 [ext_resource type="Texture2D" uid="uid://7drae0c2i058" path="res://Art and Stuff/sunflower.png" id="10_7qdmu"]
 [ext_resource type="Script" uid="uid://3d4f2e1l6tpx" path="res://Main Game/sun_counter.gd" id="10_k6j0y"]
-<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://c6obyeyu54q2s" path="res://Art and Stuff/icebergpult.png" id="11_ismam"]
-=======
 [ext_resource type="PackedScene" uid="uid://blx2kygrvf2iy" path="res://state/bush.tscn" id="11_7qdmu"]
->>>>>>> a10d160a5ef4191a1b66f3f511da1170fd77376c
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
