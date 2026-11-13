@@ -20,12 +20,13 @@ var spawning: bool = false
 var game_over: bool = false
 
 @onready var wave_label:Label=get_node("../UI/UIContainer/WaveLabel")
-
+@onready var zombie_label:Label=get_node("../UI/UIContainer/ZombieLabel")
 
 func _ready()->void:
 	wave_started.connect(_on_wave_started)
 	$SpawnTimer.wait_time = initial_spawn_interval
 	$SpawnTimer.one_shot = false
+	update_zombie_label()
 	#Wait before spawning the first zombie
 	await get_tree().create_timer(initial_spawn_delay).timeout
 	$SpawnTimer.start()
@@ -67,9 +68,10 @@ func spawn_zombie():
 	zombie.died.connect(_on_zombie_died)
 
 	get_parent().add_child.call_deferred(zombie)
-
-	zombies_to_spawn -= 1
-	alive_zombies += 1
+	
+	zombies_to_spawn-=1
+	alive_zombies+=1
+	update_zombie_label()
 
 	if zombies_to_spawn == 0:
 		spawning = false
@@ -78,6 +80,7 @@ func spawn_zombie():
 
 func _on_zombie_died():
 	alive_zombies -= 1
+	update_zombie_label()
 
 	if alive_zombies <= 0 and zombies_to_spawn == 0:
 		complete_wave()
@@ -111,3 +114,6 @@ func stop_game():
 
 func _on_wave_started(new_wave_number:int)->void:
 	wave_label.text= "WAVE "+str(new_wave_number)
+
+func update_zombie_label()->void:
+	zombie_label.text="ON LAWN: "+str(alive_zombies)+ " | TO SPAWN: "+str(zombies_to_spawn)
