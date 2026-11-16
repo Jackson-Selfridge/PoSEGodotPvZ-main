@@ -5,7 +5,7 @@ extends Node2D
 @export var speed := 350.0       # horizontal px/sec, sets flight time from distance
 @export var arc_height := 80.0
 @export var spin_speed := 8.0    # radians/sec, set to 0 if you don't want spin
-@export var slow_multiplier := 1.0   # 1.0 = no slow, 0.5 = half speed, 0.75 = 25% slower
+@export var slow_multiplier :=0.5   # 1.0 = no slow, 0.5 = half speed, 0.75 = 25% slower
 @export var slow_duration := 5.0     # seconds
 
 var _start: Vector2

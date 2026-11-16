@@ -24,12 +24,15 @@ texture = ExtResource("1_qq182")
 [node name="ShootTimer" type="Timer" parent="." unique_id=536518336]
 
 [node name="SightArea" type="Area2D" parent="." unique_id=1149711514]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightArea" unique_id=1565598928]
 position = Vector2(551.25, 24)
 shape = SubResource("RectangleShape2D_h7lo8")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=2055808313]
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1769495168]
 position = Vector2(13, 25)

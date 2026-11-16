@@ -10,12 +10,20 @@ var current_health: float
 var is_dead: bool = false
 var current_target: Node=null
 var game_over: bool = false
+var original_move_speed:float
+var slow_timer:Timer
 
 
 func _ready():
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	current_health = max_health
+	original_move_speed=move_speed
 	add_to_group("zombies")
+	
+	slow_timer=Timer.new()
+	slow_timer.one_shot=true
+	add_child(slow_timer)
+	slow_timer.timeout.connect(_on_slow_timer_timeout)
 
 
 func _physics_process(_delta):
@@ -29,7 +37,18 @@ func _physics_process(_delta):
 		velocity=Vector2.LEFT*move_speed
 
 	move_and_slide()
+	
+func apply_slow(multiplier: float, duration: float)->void:
+	if is_dead:
+		return
 
+	move_speed=original_move_speed * multiplier
+	slow_timer.start(duration)
+	print("Zombie slowed down!New speed: ", move_speed)
+
+func _on_slow_timer_timeout()->void:
+	move_speed=original_move_speed
+	print("Zombie speed restored!")
 
 func take_damage(amount: float):
 	if is_dead:
