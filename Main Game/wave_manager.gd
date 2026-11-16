@@ -10,7 +10,7 @@ var zombie_scene = preload("res://zombies/zombie.tscn")
 @export var initial_zombie_health: float = 100.0
 @export var initial_spawn_delay:float=12.0
 
-var spawn_x: float = 1000.0
+var spawn_x: float = 1350.0
 var lane_positions = [64.0, 192.0, 320.0, 448.0, 576.0]
 
 var wave_number: int = 0

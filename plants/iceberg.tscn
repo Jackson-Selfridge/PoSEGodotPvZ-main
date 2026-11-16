@@ -3,9 +3,21 @@
 [ext_resource type="Script" uid="uid://cybck1ne4k71e" path="res://plants/iceberg.gd" id="1_e14so"]
 [ext_resource type="Texture2D" uid="uid://kyidpn5lxnc3" path="res://Art and Stuff/icebergprojectile.png" id="2_766ek"]
 
-[node name="Cabbage" type="Node2D" unique_id=1624808190]
+[sub_resource type="CircleShape2D" id="CircleShape2D_uj04i"]
+radius = 24.083189
+
+[node name="Cabbage" type="Area2D" unique_id=1636947301]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_e14so")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2133221256]
 z_index = 1
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_766ek")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=651952435]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1718943682]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_uj04i")
