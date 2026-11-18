@@ -4,6 +4,7 @@ extends Node2D
 @export var peashooter_scene: PackedScene
 @export var sunflower_scene: PackedScene
 @export var icebergpult_scene:PackedScene
+@export var walnut_scene: PackedScene
 
 const PEASHOOTER_COST:=100
 const SUNFLOWER_COST:=50
@@ -11,16 +12,20 @@ const PEASHOOTER_COOLDOWN:=2.0
 const SUNFLOWER_COOLDOWN:=2.0
 const ICEBERGPULT_COST:=175
 const ICEBERGPULT_COOLDOWN:=3.0
+const WALNUT_COST:=50
+const WALNUT_COOLDOWN:=2.0
 
 var peashooter_cooldown_timer: float=0.0
 var sunflower_cooldown_timer: float=0.0
 var icebergpult_cooldown_timer:float=0.0
 var selected_plant_cost: int=0
+var selected_plant_type:String=""
+var walnut_cooldown_timer:float=0.0
 
 @onready var peashooter_button: Button=get_node("../UI/UIContainer/PlantPanel/HBoxContainer/PeashooterButton")
 @onready var sunflower_button: Button = get_node("../UI/UIContainer/PlantPanel/HBoxContainer/SunflowerButton")
 @onready var icebergpult_button: Button = get_node("../UI/UIContainer/PlantPanel/HBoxContainer/IcebergpultButton")
-
+@onready var walnut_button:Button=get_node("../UI/UIContainer/PlantPanel/HBoxContainer/WalnutButton")
 var occupied_cells: Dictionary = {}
 var preview: Node2D=null
 
@@ -35,31 +40,43 @@ func _ready() -> void:
 	peashooter_button.text="☀ 100"
 	sunflower_button.text = "☀ 50"
 	icebergpult_button.text = "☀ 175"
+	walnut_button.text="☀ 50"
 	
 	peashooter_button.pressed.connect(_on_peashooter_button_pressed)
 	sunflower_button.pressed.connect(_on_sunflower_button_pressed)
 	icebergpult_button.pressed.connect(_on_icebergpult_button_pressed)
-	
+	walnut_button.pressed.connect(_on_walnut_button_pressed)
+
+
+
+
 func _on_peashooter_button_pressed()->void:
 	if peashooter_cooldown_timer>0:
 		return
 	selected_plant_cost=PEASHOOTER_COST
+	selected_plant_type="peashooter"
 	start_plant_preview(peashooter_scene)
 	
 func _on_sunflower_button_pressed()->void:
 	if sunflower_cooldown_timer>0:
 		return
 	selected_plant_cost=SUNFLOWER_COST
+	selected_plant_type="sunflower"
 	start_plant_preview(sunflower_scene)
 
 func _on_icebergpult_button_pressed()->void:
 	if icebergpult_cooldown_timer > 0:
 		return
 	selected_plant_cost = ICEBERGPULT_COST
+	selected_plant_type="icebergpult"
 	start_plant_preview(icebergpult_scene)
 
-
-
+func _on_walnut_button_pressed()->void:
+	if walnut_cooldown_timer>0:
+		return
+	selected_plant_cost=WALNUT_COST
+	selected_plant_type="walnut"
+	start_plant_preview(walnut_scene)
 
 func _process(delta: float) -> void:
 	#Update Peashooter cooldown timer
@@ -71,6 +88,9 @@ func _process(delta: float) -> void:
 	#Update Icebergpult cooldown timer
 	if icebergpult_cooldown_timer>0:
 		icebergpult_cooldown_timer=maxf(0.0,icebergpult_cooldown_timer-delta)
+	if walnut_cooldown_timer>0:
+		walnut_cooldown_timer=maxf(0.0,walnut_cooldown_timer-delta)
+	
 	
 	#Update Peashooter button
 	if peashooter_cooldown_timer>0:
@@ -113,6 +133,19 @@ func _process(delta: float) -> void:
 		icebergpult_button.disabled=false
 		icebergpult_button.modulate=Color.WHITE
 		icebergpult_button.text="☀ 175"
+	# Update Walnut button
+	if walnut_cooldown_timer>0:
+		walnut_button.disabled=true
+		walnut_button.modulate=Color(0.5, 0.5, 0.5, 1.0)
+		walnut_button.text="☀ 50\n" + str(ceili(walnut_cooldown_timer))
+	elif not SunBank.can_afford(WALNUT_COST):
+		walnut_button.disabled=true
+		walnut_button.modulate=Color(0.5, 0.5, 0.5, 1.0)
+		walnut_button.text="☀ 50"
+	else:
+		walnut_button.disabled=false
+		walnut_button.modulate=Color.WHITE
+		walnut_button.text="☀ 50"
 	
 	
 	#Update plant preview
@@ -169,6 +202,7 @@ func cancel_plant_preview()->void:
 		preview.queue_free()
 		preview=null
 	selected_plant_cost=0
+	selected_plant_type=""
 	print("Plant selection cancelled")
 	
 	
@@ -184,15 +218,19 @@ func place_plant() ->void:
 	if not SunBank.try_spend(selected_plant_cost):
 		return
 	#Start the corresponding cooldown
-	if selected_plant_cost==PEASHOOTER_COST:
+	if selected_plant_type=="peashooter":
 		peashooter_cooldown_timer=PEASHOOTER_COOLDOWN
-	elif selected_plant_cost==SUNFLOWER_COST:
-		sunflower_cooldown_timer=SUNFLOWER_COOLDOWN
-	elif selected_plant_cost==ICEBERGPULT_COST:
-		icebergpult_cooldown_timer=ICEBERGPULT_COOLDOWN
+	elif selected_plant_type =="sunflower":
+		sunflower_cooldown_timer= SUNFLOWER_COOLDOWN
+	elif selected_plant_type=="icebergpult":
+		icebergpult_cooldown_timer =ICEBERGPULT_COOLDOWN
+	elif selected_plant_type=="walnut":
+		walnut_cooldown_timer= WALNUT_COOLDOWN
 	#Place the plant
 	if preview.has_method("setup"):
 		preview.setup(cell,lawn)
+	if preview.has_signal("died"):
+		preview.died.connect(_on_plant_died.bind(cell))
 	occupied_cells[cell]=true
 	
 	#Restore normal appearance after placement
@@ -203,4 +241,8 @@ func place_plant() ->void:
 	#Remove the preview reference
 	preview=null
 	selected_plant_cost=0
+	selected_plant_type=""
 	
+func _on_plant_died(cell: Vector2i)->void:
+		occupied_cells.erase(cell)
+		print("Plant removed from cell: ", cell)

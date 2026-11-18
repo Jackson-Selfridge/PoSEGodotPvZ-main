@@ -11,8 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://dfpt4ip716vge" path="res://plants/icebergpult.tscn" id="9_7qdmu"]
 [ext_resource type="Texture2D" uid="uid://7drae0c2i058" path="res://Art and Stuff/sunflower.png" id="10_7qdmu"]
 [ext_resource type="Script" uid="uid://3d4f2e1l6tpx" path="res://Main Game/sun_counter.gd" id="10_k6j0y"]
+[ext_resource type="PackedScene" uid="uid://boqcl4nql3u8a" path="res://plants/walnut.tscn" id="10_sppun"]
 [ext_resource type="PackedScene" uid="uid://blx2kygrvf2iy" path="res://state/bush.tscn" id="11_7qdmu"]
 [ext_resource type="Texture2D" uid="uid://c6obyeyu54q2s" path="res://Art and Stuff/icebergpult.png" id="11_ismam"]
+[ext_resource type="Texture2D" uid="uid://c6eb1bg8ugroi" path="res://Art and Stuff/walnut.png" id="13_nxmfc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
@@ -76,6 +78,7 @@ lawn = NodePath("../TileMapLayer")
 peashooter_scene = ExtResource("6_kpq5x")
 sunflower_scene = ExtResource("7_kpq5x")
 icebergpult_scene = ExtResource("9_7qdmu")
+walnut_scene = ExtResource("10_sppun")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=430044349]
 follow_viewport_enabled = true
@@ -124,6 +127,12 @@ expand_icon = true
 custom_minimum_size = Vector2(150, 70)
 layout_mode = 2
 icon = ExtResource("11_ismam")
+expand_icon = true
+
+[node name="WalnutButton" type="Button" parent="UI/UIContainer/PlantPanel/HBoxContainer" unique_id=1293644895]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 2
+icon = ExtResource("13_nxmfc")
 expand_icon = true
 
 [node name="SunCounter" type="PanelContainer" parent="UI/UIContainer" unique_id=913157316]

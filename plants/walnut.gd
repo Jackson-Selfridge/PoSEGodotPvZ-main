@@ -17,11 +17,14 @@ func _ready() -> void:
 func setup(plant_cell: Vector2i, plant_lawn: Lawn) -> void:
 	cell = plant_cell
 	lawn = plant_lawn
+	add_to_group("plants")
 
 func take_damage(amount: int) -> void:
 	if _dead:
 		return
 	health -= amount
+	health=maxi(health,0)
+	print("Walnut health: ",health," / ", max_health)
 	_on_damaged()
 	if health <= 0:
 		_die()
@@ -32,7 +35,5 @@ func _on_damaged() -> void:
 
 func _die() -> void:
 	_dead = true
-	if lawn:
-		lawn.set_occupied(cell, false)   # frees the tile so you can replant
 	died.emit()
 	queue_free()

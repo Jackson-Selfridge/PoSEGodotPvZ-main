@@ -14,8 +14,9 @@ position = Vector2(5, 0)
 scale = Vector2(4.8281245, 4.6367188)
 texture = ExtResource("2_eix65")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=2143133124]
+[node name="HurtBox" type="Area2D" parent="." unique_id=2143133124]
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=491464897]
+[node name="HurtBox2D" type="CollisionShape2D" parent="HurtBox" unique_id=491464897]
 position = Vector2(3, 6)
 shape = SubResource("RectangleShape2D_wsnoc")

@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var projectile_scene: PackedScene
-@export var shoot_interval := 2.5  # peashooter is 1.5; real PvZ cabbage-pult is ~3.0
+@export var shoot_interval := 4  # peashooter is 1.5; real PvZ cabbage-pult is ~3.0
 @export var max_health:float=100.0
 
 var current_health:float
