@@ -4,19 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://c6eb1bg8ugroi" path="res://Art and Stuff/walnut.png" id="2_eix65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wsnoc"]
-size = Vector2(143.75, 132)
+size = Vector2(120.5, 127.5)
 
 [node name="Walnut" type="Node2D" unique_id=1049214355]
 script = ExtResource("1_33b2x")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=158931850]
-position = Vector2(5, 0)
-scale = Vector2(4.8281245, 4.6367188)
+position = Vector2(-1, 0)
+scale = Vector2(4.3945317, 4.28418)
 texture = ExtResource("2_eix65")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=2143133124]
 collision_mask = 0
 
 [node name="HurtBox2D" type="CollisionShape2D" parent="HurtBox" unique_id=491464897]
-position = Vector2(3, 6)
+position = Vector2(-1.25, 5.25)
 shape = SubResource("RectangleShape2D_wsnoc")

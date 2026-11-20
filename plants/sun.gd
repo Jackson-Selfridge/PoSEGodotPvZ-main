@@ -4,20 +4,14 @@ extends Area2D
 signal collected(value: int)
 
 @export var value := 25
-@export var lifetime := 10.0   # seconds before it starts fading away
+@export var lifetime := 8.0   # seconds it sits on the ground before fading
 
 var _collected := false
 
 func _ready() -> void:
 	input_event.connect(_on_input_event)
-	
-	# Sits there for `lifetime`, fades out over 1 second, then disappears
-	var tween := create_tween()
-	tween.tween_interval(lifetime)
-	tween.tween_property(self, "modulate:a", 0.0, 1.0)
-	tween.tween_callback(queue_free)
 
-# Pops the sun out in a little arc and lands it at `landing_pos`
+# Sunflower style: pops out in a little arc
 func launch(landing_pos: Vector2) -> void:
 	var peak_y := minf(global_position.y, landing_pos.y) - 40.0
 	
@@ -29,6 +23,20 @@ func launch(landing_pos: Vector2) -> void:
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween_y.tween_property(self, "global_position:y", landing_pos.y, 0.3) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween_y.tween_callback(_start_expiry)
+
+# Sky style: falls straight down at a constant speed
+func fall_to(landing_pos: Vector2, fall_speed := 60.0) -> void:
+	var duration := absf(landing_pos.y - global_position.y) / fall_speed
+	var tween := create_tween()
+	tween.tween_property(self, "global_position", landing_pos, duration)
+	tween.tween_callback(_start_expiry)
+
+func _start_expiry() -> void:
+	var tween := create_tween()
+	tween.tween_interval(lifetime)
+	tween.tween_property(self, "modulate:a", 0.0, 1.0)
+	tween.tween_callback(queue_free)
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if _collected:

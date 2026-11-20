@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c01670571vg1n" path="res://Art and Stuff/Lgrass.webp" id="1_n1f5j"]
 [ext_resource type="Texture2D" uid="uid://dhreq80hgh250" path="res://Art and Stuff/Dgrass.jpeg" id="2_n1f5j"]
 [ext_resource type="Texture2D" uid="uid://df08eromgidm1" path="res://Art and Stuff/sidewalk.png" id="3_nbeho"]
-[ext_resource type="Script" uid="uid://d2vjvwq063hop" path="res://Main Game/checkerboard.gd" id="3_v3n8n"]
+[ext_resource type="Script" uid="uid://d2vjvwq063hop" path="res://Main Game/lawn.gd" id="3_v3n8n"]
 [ext_resource type="Script" uid="uid://bda1untpe0br0" path="res://Main Game/house_trigger.gd" id="5_v3n8n"]
 [ext_resource type="Script" uid="uid://dkoosxfhn3ek1" path="res://Main Game/wave_manager.gd" id="6_kmnlm"]
 [ext_resource type="PackedScene" uid="uid://bx5ws6pop7mam" path="res://plants/peashooter.tscn" id="6_kpq5x"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://blx2kygrvf2iy" path="res://state/bush.tscn" id="11_7qdmu"]
 [ext_resource type="Texture2D" uid="uid://c6obyeyu54q2s" path="res://Art and Stuff/icebergpult.png" id="11_ismam"]
 [ext_resource type="Texture2D" uid="uid://c6eb1bg8ugroi" path="res://Art and Stuff/walnut.png" id="13_nxmfc"]
+[ext_resource type="Script" uid="uid://ck1iqv1sddbpu" path="res://Main Game/sun_sky_spawner.gd" id="17_o6grl"]
+[ext_resource type="PackedScene" uid="uid://x5otwexajhin" path="res://plants/sun.tscn" id="18_euisn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb883"]
 texture = ExtResource("1_n1f5j")
@@ -53,7 +55,7 @@ load_path = "res://.godot/imported/peashooter.png-a9c92c1ea6c7ce16a25d066c2f9c53
 
 [node name="Node2D" type="Node2D" unique_id=178753730]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1818240329]
+[node name="Lawn" type="TileMapLayer" parent="." unique_id=1818240329]
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAEAAAAAAAEAAgAAAAEAAAABAAAAAgAAAAEAAAABAAEAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAgAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAgAAAAEAAAAGAAAAAQAAAAEAAAAHAAAAAgAAAAEAAAAIAAAAAQAAAAEAAAAIAAEAAgAAAAEAAAAHAAEAAQAAAAEAAAAGAAEAAgAAAAEAAAAFAAEAAQAAAAEAAAAEAAEAAgAAAAEAAAADAAEAAQAAAAEAAAACAAEAAgAAAAEAAAAAAAIAAQAAAAEAAAABAAIAAgAAAAEAAAACAAIAAQAAAAEAAAADAAIAAgAAAAEAAAAEAAIAAQAAAAEAAAAFAAIAAgAAAAEAAAAGAAIAAQAAAAEAAAAHAAIAAgAAAAEAAAAIAAIAAQAAAAEAAAAIAAMAAgAAAAEAAAAHAAMAAQAAAAEAAAAGAAMAAgAAAAEAAAAFAAMAAQAAAAEAAAAEAAMAAgAAAAEAAAADAAMAAQAAAAEAAAACAAMAAgAAAAEAAAABAAMAAQAAAAEAAAAAAAMAAgAAAAEAAAAAAAQAAQAAAAEAAAABAAQAAgAAAAEAAAACAAQAAQAAAAEAAAADAAQAAgAAAAEAAAAEAAQAAQAAAAEAAAAFAAQAAgAAAAEAAAAGAAQAAQAAAAEAAAAHAAQAAgAAAAEAAAAIAAQAAQAAAAEAAAAIAAUAAwAAAAAAAAAHAAUAAwAAAAAAAAAGAAUAAwAAAAAAAAAFAAUAAwAAAAAAAAAEAAUAAwAAAAAAAAADAAUAAwAAAAAAAAACAAUAAwAAAAAAAAABAAUAAwAAAAAAAAAAAAUAAwAAAAAAAAD//wUAAwAAAAAAAAD//wQAAwAAAAAAAAD//wMAAwAAAAAAAAD//wIAAwAAAAAAAAD//wEAAwAAAAAAAAD//wAAAwAAAAAAAAAJAAUAAwAAAAAAAAA=")
 tile_set = SubResource("TileSet_g36yv")
 script = ExtResource("3_v3n8n")
@@ -81,7 +83,7 @@ autostart = true
 
 [node name="PlantPlacement" type="Node2D" parent="." unique_id=1976489846 node_paths=PackedStringArray("lawn")]
 script = ExtResource("8_85v1m")
-lawn = NodePath("../TileMapLayer")
+lawn = NodePath("../Lawn")
 peashooter_scene = ExtResource("6_kpq5x")
 sunflower_scene = ExtResource("7_kpq5x")
 icebergpult_scene = ExtResource("9_7qdmu")
@@ -186,6 +188,13 @@ position = Vector2(1230, 353)
 
 [node name="Bush5" parent="." unique_id=1492320612 instance=ExtResource("11_7qdmu")]
 position = Vector2(1226, 485)
+
+[node name="SunSkySpawner" type="Node2D" parent="." unique_id=806909895 node_paths=PackedStringArray("lawn")]
+script = ExtResource("17_o6grl")
+sun_scene = ExtResource("18_euisn")
+lawn = NodePath("../Lawn")
+
+[node name="Timer" type="Timer" parent="SunSkySpawner" unique_id=1268060702]
 
 [connection signal="body_entered" from="HouseTrigger" to="HouseTrigger" method="_on_body_entered"]
 [connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_spawn_timer_timeout"]
