@@ -2,7 +2,7 @@ extends Node
 
 signal sun_changed(new_amount: int)
 
-const STARTING_SUN = 500
+const STARTING_SUN = 50
 
 var sun: int = STARTING_SUN:
 	set(value):

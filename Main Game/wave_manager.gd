@@ -63,7 +63,8 @@ func spawn_zombie():
 	var random_lane = randi_range(0, lane_positions.size() - 1)
 	zombie.position = Vector2(spawn_x, lane_positions[random_lane])
 
-	zombie.max_health = initial_zombie_health + (wave_number - 1) * 15
+	zombie.max_health = initial_zombie_health + (wave_number - 1) * 25
+	zombie.move_speed=30.0+(wave_number-1)*5.0
 
 	zombie.died.connect(_on_zombie_died)
 
